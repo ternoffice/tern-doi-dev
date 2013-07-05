@@ -258,18 +258,20 @@ class ApiController extends Controller
 		$dataMgr = (hash('ripemd128',$digest)==trim($app_id))? true:false;
 		
 		//Valid DOI ownership 
+               
 		if ($doi)
 		{
 			$ownDoi = Doc::model()->findByAttributes(array('doc_doi'=>$doi, 'user_id'=>$user_id));
 			if (!$ownDoi){
 				$result = array('Status'=>array('http_code'=>500), 'xml'=>'[TERN-DOI] There has been an unexpected error processing your doi request. For more information please contact TERN DOI team. You must be the DOI owner.');
-				return $result;
+				return $result; 
 			}
 		}
 
 		if (!$dataMgr) 
 		{
-			$result = array('Status'=>array('http_code'=>500), 'xml'=>'[TERN-DOI] There has been an unexpected error processing your doi request. For more information please contact TERN DOI team. You must provide a data manager app id to update a doi.');
+			//$result = array('Status'=>array('http_code'=>500), 'xml'=>'[TERN-DOI] There has been an unexpected error processing your doi request. For more information please contact TERN DOI team. You must provide a data manager app id to update a doi.');
+                        $result = array('Status'=>array('http_code'=>500), 'xml'=>'[TERN-DOI] There has been a mismatch in app Id.');
 		} 
 		else 
 		{
