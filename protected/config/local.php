@@ -9,7 +9,7 @@ return array(
 
         'adminId' => 'y.sun5@uq.edu.au',
         // this is used in contact page
-        'adminEmail' => 'y.sun5@uq.edu.au',
+        'adminEmail' => 'y.sun5@uq.edu.au',  
         
         'facilityList' => array(
             'AusCover'=>'AusCover',
