@@ -1,0 +1,31 @@
+Date: Wed, 26 Mar 2014 11:07:51 +1000
+Return-Path: <sunyi000@gmail.com>
+From: TERN Data <sunyi000@gmail.com>
+Message-ID: <3ff93df58bcade7f71be9b4a08e66a47@doi.tern.uq.edu.au>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.6 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="b1_3ff93df58bcade7f71be9b4a08e66a47"
+Content-Transfer-Encoding: 8bit
+To: y.sun5@uq.edu.au
+Subject: DOI user approval
+
+--b1_3ff93df58bcade7f71be9b4a08e66a47
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+User Mr Yi Sun is waiting for your approval.
+https://doi.tern.uq.edu.au/dev/index.php?r=user/update&id=y.sun5@uq.edu.au
+
+
+--b1_3ff93df58bcade7f71be9b4a08e66a47
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+User Mr Yi Sun is waiting for your approval.
+https://doi.tern.uq.edu.au/dev/index.php?r=user/update&id=y.sun5@uq.edu.au
+
+
+
+--b1_3ff93df58bcade7f71be9b4a08e66a47--
