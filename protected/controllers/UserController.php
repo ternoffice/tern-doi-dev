@@ -32,17 +32,18 @@ public function init(){
 	 */
 	public function accessRules()
 	{
-		if($this->user !== null && $this->user->approved == TRUE && $this->user->enabled==TRUE){
-            // approved
-            $userId= $this->user->user_id;
-        }
+		if($this->user !== null && $this->user->approved == TRUE && $this->user->enabled==TRUE)
+                {
+                    // approved
+                    $userId= $this->user->user_id;
+                }
 		else
 		{
-            // not approved
-            $userId= 'notapproved';
-        }
+                    // not approved
+                    $userId= 'notapproved';
+                }
 		// check admin user
-        $adminUser = (Yii::app()->params->adminId == $userId)? true:false;
+                $adminUser = (Yii::app()->params->adminId == $userId)? true:false;
 		return array(
 			array('allow', 
 				'actions'=>array('index','update','create','enabled','disabled','admin'),
@@ -106,7 +107,7 @@ public function init(){
 	 * @param integer $id the ID of the model to be updated
 	 */
 	public function actionUpdate($id)
-	{
+	{            
 		if (!(Yii::app()->params->adminId == Yii::app()->user->id || 
 			Yii::app()->user->id == $id))
 		{
@@ -209,15 +210,16 @@ public function init(){
 				'dataProvider'=>$dataProvider,
 			));
 			*/
-		if($this->user !== null && $this->user->approved == TRUE && $this->user->enabled==TRUE){
-                // approved
-                $userId= $this->user->user_id;
-        }
+		if($this->user !== null && $this->user->approved == TRUE && $this->user->enabled==TRUE)
+                {
+                    // approved
+                    $userId= $this->user->user_id;
+                }
 		else
 		{
-            // not approved
-            $userId= 'notapproved';
-        }
+                    // not approved
+                    $userId= 'notapproved';
+                }
 
         $dataProvider = new CActiveDataProvider('User', array(
                     'criteria' => array(

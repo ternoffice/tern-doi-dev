@@ -10,7 +10,7 @@
 	
 	
 	<div class="row buttons">
-		<a href="aaf">Login using AAF</a>		
+		<a href="aaf">Login using AAFaa</a>		
 	</div>
 	<div class="row buttons">
 		<?php echo CHtml::link('Login using Google',array('site/google')); ?>		

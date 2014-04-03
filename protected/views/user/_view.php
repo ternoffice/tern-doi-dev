@@ -30,16 +30,21 @@
 
 	<?php 
 	if (CHtml::encode($data->data_manager)) { 
-		$appIdExpiry = Yii::app()->params->appIdExpiry;
-		$digest = date('Y') . CHtml::encode($data->email) .  CHtml::encode($data->appid_seed) .  floor((date('m')-1)/$appIdExpiry);
-		$month = (floor((date('m')-1)/$appIdExpiry)+1)*$appIdExpiry+1;
-		$month = (strlen($month)==1)?  "0$month":$month;
-		$end = ($month>12)? (date('Y')+1).'-01-01 00:00:00' : date('Y').'-'.$month.'-01 00:00:00';
-		$date_diff = date_diff(date_create(), date_create($end));
+		//$appIdExpiry = Yii::app()->params->appIdExpiry;
+		//$digest = date('Y') . CHtml::encode($data->email) .  CHtml::encode($data->appid_seed) .  floor((date('m')-1)/$appIdExpiry);
+  
+		//$month = (floor((date('m')-1)/$appIdExpiry)+1)*$appIdExpiry+1;
+		//$month = (strlen($month)==1)?  "0$month":$month;
+		//$end = ($month>12)? (date('Y')+1).'-01-01 00:00:00' : date('Y').'-'.$month.'-01 00:00:00';
+		//$date_diff = date_diff(date_create(), date_create($end));
+
+		$digest = CHtml::encode($data->email) .  CHtml::encode($data->appid_seed);
+  
+
 	?>
 
 	<b>AppID:</b> <?= hash('ripemd128', $digest); ?> 
-	<div class="help" id="expiryDay"><strong style="color:red;">The AppID will be expired in <?= $date_diff->days ?> days.</strong></div>
+	<!--<div class="help" id="expiryDay"><strong style="color:red;">The AppID will be expired in <?php // $date_diff->days ?> days.</strong></div>-->
 	<script type="text/javascript">
 		$('#expiryDay').show();
 	</script>

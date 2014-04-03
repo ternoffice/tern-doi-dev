@@ -24,7 +24,7 @@ function addRow(name){
     
 
  // alert($("#Doc_creator_0_creatorName_@value").val());
-}
+
 
 $(function() {
     $('.calendar').live('click', function() {

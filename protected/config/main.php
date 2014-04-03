@@ -10,20 +10,21 @@ require_once( dirname(__FILE__) .  '/../components/helper.php');
 
 return CMap::mergeArray(
         array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'TERN DOI Service',
+            'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+            'name'=>'TERN DOI Service',
 
-	// preloading 'log' component
-	'preload'=>array('log'),
+            // preloading 'log' component
+            'preload'=>array('log'),
 
-	// autoloading model and component classes
-	'import'=>array(
+            // autoloading model and component classes
+            'import'=>array(
 		'application.models.*',
 		'application.components.*',
                 'ext.giix-components.*', // giix components
-	),
+                'ext.YiiMailer.YiiMailer',
+            ),
 
-	'modules'=>array(
+            'modules'=>array(
 		// uncomment the following to enable the Gii tool
 		
 		'gii'=>array(
@@ -36,28 +37,15 @@ return CMap::mergeArray(
                     ),
 		),
 		
-	),
+            ),
 
-	// application components
-	'components'=>array(
+            //application components
+            'components'=>array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-		// uncomment the following to enable URLs in path-format
-		/*
-		'urlManager'=>array(
-			'urlFormat'=>'path',
-			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-			),
-		),
-		*/
-		/*'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),*/
+
 		// uncomment the following to use a Postgres database
 		
 		'db'=>array(
@@ -72,44 +60,38 @@ return CMap::mergeArray(
                 ),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
-            'errorAction'=>'site/error',
-        ), 
-	'log'=>array(
+                        'errorAction'=>'site/error',
+                ), 
+            'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
 				'stdlog' => array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
-					'logPath'=>'/opt/tern-doi/log',
+					'logPath'=>'/opt/tern-doi-dev/log',
 				),
                                 'citelog' => array(
                                        'class'=>'CFileLogRoute',
                                         'levels'=>'error,warning,info',
-					'logPath'=>'/opt/tern-doi/log',
+					'logPath'=>'/opt/tern-doi-dev/log',
                                         'logFile'=>'citeANDS.log',
                                         'categories' => 'system.components.CiteANDS',
                                 ),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
+
 			),
 		),
+            'email'=>array(
+                'class'=>'application.extensions.email.Email',
+                'delivery'=>'php', //Will use the php mailing function.  
+                //May also be set to 'debug' to instead dump the contents of the email into the view
+                ),
 	),
 
-	// application-level parameters that can be accessed
-	// using Yii::app()->params['paramName']
-	'params'=>array(
-		// this is used in contact page
-		'adminEmail'=>'admin@tern.org.au',
-	),
         //set theme to classic
         'theme'=>'classic',
    
       ),
-          local_config()
+ array_merge_recursive(local_config(),ands_config(),error_config())
 );
 
 // return an array of custom local configuration settings
@@ -118,7 +100,27 @@ function local_config()
   if (file_exists(dirname(__FILE__).'/local.php'))
   {
     return require_once(dirname(__FILE__).'/local.php');
-  }
 
+  }
   return array();
-};
+}
+
+function error_config()
+{
+  if (file_exists(dirname(__FILE__).'/error.php'))
+  {
+    return require_once(dirname(__FILE__).'/error.php');
+  }
+  return array();
+}
+
+function ands_config()
+{
+  if (file_exists(dirname(__FILE__).'/ands.php'))
+  {
+    return require_once(dirname(__FILE__).'/ands.php');
+  }
+  return array();
+}
+
+;

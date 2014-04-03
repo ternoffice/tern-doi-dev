@@ -24,12 +24,16 @@ function mailAdmin($model)
 		$message = 'User '.$model->username." is waiting for your approval.\r\n".
 			$server . 'index.php?r=user/update&id='.$model->email;
 	}
-
+ 
 	$to      = Yii::app()->params->adminId;
+
 	$headers = 'From: '.$model->email."\r\n" .
 		'Reply-To: '.$model->email."\r\n" .
 		'X-Mailer: PHP/' . phpversion();
+       
 	mail($to, $subject, $message, $headers);
+        
+
 }
 
 /**
@@ -391,4 +395,35 @@ function sprintfn($format, array $args = array())
     }
     return vsprintf($format, array_values($args));
 }
+
+	/**
+	 * The private function to fix Html entities.
+	 * @param string $xml the result returned from ANDS API.
+	 * @return fixed value.
+	 */
+    function fixHtmlEntities($xml)
+    {
+        // Encode html entities but destroy character nember referrence
+        $xml = htmlentities($xml,ENT_NOQUOTES, 'ISO-8859-1');
+        // Restore damaged character nember referrence
+        while (strpos($xml,'&amp;'))
+        {
+                $xml = str_replace('&amp;', '&', $xml);
+        }
+        // Decode character nember referrence
+        $xml = html_entity_decode($xml, ENT_COMPAT, 'UTF-8');
+        return $xml;
+    }
+    
+    /**
+     * The private function to output HTTP code and XML response.
+     * Set HTTP code header and output XML.
+     * @param array $result the result returned from ANDS API.
+     */
+    function response($result)
+    {
+            header('HTTP/1.0 '.$result['Status']['http_code']);
+            //print_r($result['xml']->asXML());
+            print_r($result['xml']);
+    }
 ?>

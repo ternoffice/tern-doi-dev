@@ -9,6 +9,7 @@
  * @property string $facility
  * @property string $email
  * @property boolean $approved
+ * @property boolean $data_manager
  */
 class User extends CActiveRecord
 {
@@ -46,7 +47,7 @@ class User extends CActiveRecord
 			array('data_manager','safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id,username, facility, email, approved,enabled', 'safe', 'on'=>'search'),
+			array('user_id,username, facility, email, approved,enabled, data_manager', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -88,7 +89,6 @@ class User extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-		
 		$criteria->compare('user_id',$this->user_id,true);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('facility',$this->facility,true);

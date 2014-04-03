@@ -2,6 +2,7 @@
 $baseP=Yii::app()->basePath;
 
 require $baseP.'/include/openid.php';
+
 class SiteController extends GxController
 {
 	private $_identity;
@@ -55,8 +56,9 @@ class SiteController extends GxController
 	 * This is the action to handle external exceptions.
 	 */
 	public function actionError()
-	{
-	    if($error=Yii::app()->errorHandler->error)
+	{            
+            //print_r(Yii::app()->errorHandler->error);die();
+	    if($error==Yii::app()->errorHandler->error)
 	    {
 	    	if(Yii::app()->request->isAjaxRequest)
 	    		echo $error['message'];
@@ -88,33 +90,14 @@ class SiteController extends GxController
 	/**
 	 * Displays the login page
 	 */
+        
 	public function actionLogin()
 	{
-		$model=new LoginForm;
-
-		// if it is ajax validation request
-		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-
-		// collect user input data
-		if(isset($_POST['LoginForm']))
-		{
-			$model->attributes=$_POST['LoginForm'];
-			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
-		}
-		// display the login form
-		$this->render('loginoption',array('model'=>$model));
+   
+              $this->render('loginoption');
+             
 	}
 
-	public function actionLoginoption()
-	{
-		$this->render('loginoption');
-	}
 	/**
 	 * Logs out the current user and redirect to homepage.
 	 */
@@ -124,18 +107,20 @@ class SiteController extends GxController
 		$this->redirect(Yii::app()->homeUrl);
 	}
 
+
 	public function actionAAF()
-	{
+	{            
+                $session_expiration = time() + 3600 * 24 * 2; // +2 days
+                session_set_cookie_params($session_expiration);
 		session_start();
-		$id = $_SESSION['email'];
+                
+            	$id = $_SESSION['email'];
 		$email = $_SESSION['email'];
 		$displayName = $_SESSION['displayName'];
 		$organizationName = $_SESSION['organizationName'];
 
 		if(isset($_SESSION['displayName']))
 		{
-
-
 			Yii::app()->user->name = $displayName;
 			Yii::app()->user->id = $email;
 			$model=User::model()->findByPk($email);
@@ -187,16 +172,16 @@ class SiteController extends GxController
 		{
 			echo 'User has not logged in.';
 		}
+             
 	}
 	
 	public function actionGoogle()
 	{
 		//$model=new User;
-
 		try {
 
 //    		$openid = new LightOpenID('qcifvm2.genome.at.uq.edu.au');
-    		$openid = new LightOpenID('doi.tern.uq.edu.au');
+    		$openid = new LightOpenID('doi-tern.soe.uq.edu.au');
     		//$openid = new LightOpenID('localhost');
     		if(!$openid->mode)
     		{
@@ -324,8 +309,8 @@ class SiteController extends GxController
 	}
 
 	public function actionCreateuser()
-	{
-		if(isset($_POST['accept']))
+	{            
+   		if(isset($_POST['accept']))
 		{
 			$model=$this->loadModel(Yii::app()->user->id,'User');
 
@@ -340,9 +325,9 @@ class SiteController extends GxController
 
 			$model->facility=$_POST['User']['facility'];
 			$model->data_manager=$_POST['User']['data_manager'];
-			$model->save();
+			$model->save(); 
 			mailAdmin($model);
-			$this->render('emailsend');
+			$this->render('emailsend');  
 		}
 		else
 		{

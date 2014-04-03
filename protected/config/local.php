@@ -6,35 +6,11 @@
  */
 return array(
     'params' => array(
-	 // Number of months before the AppID expired counted from the first day of the year.  
-        // Best numbers are 1, 2, 3, 4, and 6 
-        'appIdExpiry' => 3,
+
+        'adminId' => 'y.sun5@uq.edu.au',
         // this is used in contact page
-        'adminEmail' => 'tern.data@uq.edu.au',
-/* ANDS DOI service point 1.0
-        'andsMintUrl' =>       'http://services.ands.org.au/home/dois/doi_mint.php', //https://services.ands.org.au/home/dois/doi_mint.php',
-        'andsUpdateUrl' =>     'http://services.ands.org.au/home/dois/doi_update.php',
-        'andsDeactivateUrl' => 'https://services.ands.org.au/home/dois/doi_deactivate.php',
-        'andsActivateUrl' =>   'https://services.ands.org.au/home/dois/doi_activate.php',
-        'andsMetadataUrl' =>   'https://services.ands.org.au/home/dois/doi_xml.php',
-*/
-// ANDS  DOI service point 1.1
-        'andsMintUrl' =>       'https://services.ands.org.au/doi/1.1/mint.xml/',
-        'andsUpdateUrl' =>     'https://services.ands.org.au/doi/1.1/update.xml/',
-        'andsDeactivateUrl' => 'https://services.ands.org.au/doi/1.1/deactivate.xml/',
-        'andsActivateUrl' =>   'https://services.ands.org.au/doi/1.1/activate.xml/',
-        'andsMetadataUrl' =>   'https://services.ands.org.au/doi/1.1/xml.xml/',
-        'appId' => 'TEST313ba574c47f1cdd8f626942dd8b6509441f23a9', // remove when releasing to Google Code
-        'resource' => Array(
-            'xmlns' => 'http://datacite.org/schema/kernel-2.1',
-            'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
-            'xsi:schemaLocation' => 'http://datacite.org/schema/kernel-2.1 http://schema.datacite.org/meta/kernel-2.1/metadata.xsd'
-        ),
-        'strValue' => '@value',
-        'strAttribute' => '@attributes',
-        //'doi_citate_url' => 'http://dx.doi.org/',
-        'doiCitateFormat' => '%C$s (%PY$s): %T$s. %P$s. doi:%D$s. <br/><a href="http://dx.doi.org/%D$s" target="_new">http://dx.doi.org/%D$s</a>',
-        'doiCitateCreatorSeparator' => '; ',
+        'adminEmail' => 'y.sun5@uq.edu.au',
+        
         'facilityList' => array(
             'AusCover'=>'AusCover',
             'OzFlux'=>'OzFlux',
@@ -330,13 +306,10 @@ return array(
             'ARXIV' => 'arXiv Author',
             'ELSEVIER' => 'Elsevier Scopus Author',
             'NLA' => 'NLA People Australia',
-//            'THOMSON' => 'Thomson Reuters ',
             'ResearcherID' => 'ResearcherID',
         ), 
        'dateRegex' => '^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$^',
-//		'adminId' => 'wingfai.wong@gmail.com',
-		'adminId' => 'w.wong2@uq.edu.au',
-//		'adminId' => 's.guru@uq.edu.au',
+
     ),
 )
 ?>

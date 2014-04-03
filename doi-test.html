@@ -8,106 +8,113 @@
 <h1>TERN DOI Service - API Examples</h1>
 
 <p>Activate DOI:
-	<a href="https://doi.tern.uq.edu.au/dev/index.php?r=api/active&user_id=w.wong2@uq.edu.au&app_id=97c8512f99a04d7cdebdee7cd9635bf5&doi=10.5072/05/4FF4DECF904B1">Example URL</a>
+	<a href="https://doi.tern.uq.edu.au/dev/index.php?r=api/active&user_id=y.sun5@uq.edu.au&app_id=ba89d1dfe9cd6a0fcbba7983d6da0c29&doi=10.5072/05/533264079F4F9">Example URL</a>
 </p>
 <hr />
 
 <p>Deactivate DOI: 
-	<a href="https://doi.tern.uq.edu.au/dev/index.php?r=api/inactive&user_id=w.wong2@uq.edu.au&app_id=97c8512f99a04d7cdebdee7cd9635bf5&doi=10.5072/05/4FF4DECF904B1">Example URL</a>
+	<a href="https://doi.tern.uq.edu.au/dev/index.php?r=api/inactive&user_id=y.sun5@uq.edu.au&app_id=ba89d1dfe9cd6a0fcbba7983d6da0c29&doi=10.5072/05/533264079F4F9">Example URL</a>
 </p>
 <hr />
 
-<p>Mint DOI:  
-	<form action="https://doi.tern.uq.edu.au/dev/index.php?r=api/create&user_id=w.wong2@uq.edu.au&app_id=97c8512f99a04d7cdebdee7cd9635bf5&url=http://aceas-data.science.uq.edu.au/knb/metacat/smguru.42.2/default" method="post">
-<textarea name="xml" rows="20" cols="120">
-<?xml version="1.0" encoding="UTF-8"?>
-<resource xmlns="http://datacite.org/schema/kernel-2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://datacite.org/schema/kernel-2.1 http://schema.datacite.org/meta/kernel-2.1/metadata.xsd">
-  <identifier identifierType="DOI"></identifier>
-  <creators>
-    <creator>
-      <creatorName>First, Last name </creatorName>
-    </creator>
-  </creators>
-  <titles>
-    <title>API Minting Example</title>
-  </titles>
-  <publisher>ACEAS</publisher>
-  <publicationYear>2012</publicationYear>
-</resource>
-</textarea><br />
-<input type="submit" value="Mint DOI" /></form></p>
+Mint DOI:  
+	<form action="https://doi.tern.uq.edu.au/dev/index.php?r=api/create&user_id=y.sun5@uq.edu.au&app_id=ba89d1dfe9cd6a0fcbba7983d6da0c29&url=http://aceas-data.science.uq.edu.au/knb/metacat/smguru.42.2/default" method="post">
+            <textarea name="xml" rows="20" cols="120">
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <resource xsi:schemaLocation="http://datacite.org/schema/kernel-2.1 
+				http://schema.datacite.org/meta/kernel-2.1/metadata.xsd" 
+				xmlns="http://datacite.org/schema/kernel-2.1" 
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <identifier identifierType="DOI"/>
+                    <creators>
+                            <creator>
+                                    <creatorName>Sun,Yi test</creatorName>
+                            </creator>
+                    </creators>
+                    
+                    <titles>
+                            <title>YiTest</title>
+                    </titles>
+                    
+                    <publisher>Atlas of Living Australia</publisher>
+                    <publicationYear>2013</publicationYear>
+                    
+                    <dates>
+                        <date dateType="Created">2014-02-25</date>
+                        <date dateType="StartDate">2014-02-25</date>
+                    </dates>
+                </resource>
+            </textarea><br />
+            
+            <input type="submit" value="Mint DOI" />
+        </form>
 <hr />
 
 
-<P>Update DOI: 10.5072/05/4FF4DECF904B1
-	<form action="https://doi.tern.uq.edu.au/dev/index.php?r=api/update&user_id=w.wong2@uq.edu.au&app_id=97c8512f99a04d7cdebdee7cd9635bf5&url=http://tern.org.au/?&doi=10.5072/05/4FF4DECF904B1" method="post">
-<textarea name="xml" rows="20" cols="120">
-<?xml version="1.0" encoding="UTF-8"?>
-<resource xmlns="http://datacite.org/schema/kernel-2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://datacite.org/schema/kernel-2.1 http://schema.datacite.org/meta/kernel-2.1/metadata.xsd">
-  <identifier identifierType="DOI">10.5072/05/4FB9B7D63BD8E</identifier>
-  <creators>
-    <creator>
-      <creatorName>First, Last name</creatorName>
-    </creator>
-  </creators>
-  <titles>
-    <title>API Update Example</title>
-  </titles>
-  <publisher>ACEAS</publisher>
-  <publicationYear>2012</publicationYear>
-  <subjects>
-    <subject subjectScheme="Subject">Subject</subject>
-  </subjects>
-  <contributors>
-    <contributor contributorType="ContactPerson">
-      <contributorName>Contributor 1</contributorName>
-      <nameIdentifier nameIdentifierScheme="THOMSON">Name Identifier</nameIdentifier>
-    </contributor>
-    <contributor contributorType="ContactPerson">
-      <contributorName>Contributor 2</contributorName>
-      <nameIdentifier nameIdentifierScheme="THOMSON">Name Identifier</nameIdentifier>
-    </contributor>
-    <contributor contributorType="ContactPerson">
-      <contributorName>Contributor 3</contributorName>
-      <nameIdentifier nameIdentifierScheme="THOMSON">Name Identifier</nameIdentifier>
-    </contributor>
-  </contributors>
-  <dates>
-    <date dateType="Accepted">2012-01-01</date>
-    <date dateType="Accepted">2012-02-02</date>
-    <date dateType="Accepted">2012-03-03</date>
-  </dates>
-  <language>UTF-8</language>
-  <resourceType resourceTypeGeneral="Collection">Resource Type</resourceType>
-  <alternateIdentifiers>
-    <alternateIdentifier alternateIdentifierType="Cites">Alternate Identifier 1</alternateIdentifier>
-    <alternateIdentifier alternateIdentifierType="Cites">Alternate Identifier 2</alternateIdentifier>
-    <alternateIdentifier alternateIdentifierType="Cites">Alternate Identifier 3</alternateIdentifier>
-  </alternateIdentifiers>
-  <relatedIdentifiers>
-    <relatedIdentifier relatedIdentifierType="ARK" relationType="Cites">Related Identifier 1</relatedIdentifier>
-    <relatedIdentifier relatedIdentifierType="ARK" relationType="Cites">Related Identifier 2</relatedIdentifier>
-    <relatedIdentifier relatedIdentifierType="ARK" relationType="Cites">Related Identifier 3</relatedIdentifier>
-  </relatedIdentifiers>
-  <sizes>
-    <size>Size 1</size>
-    <size>Size 2</size>
-    <size>Size 3</size>
-  </sizes>
-  <formats>
-    <format>Format 1</format>
-    <format>Format 2</format>
-    <format>Format 3</format>
-  </formats>
-  <version>Version</version>
-  <rights>Rights</rights>
-  <descriptions>
-    <description descriptionType="Abstract">Description</description>
-  </descriptions>
-</resource>
-</textarea><br />
-<input type="submit" value="Update DOI" />
-</form></p>
+Update DOI: 10.5072/05/531FE33F49EF4
+	<form action="https://doi.tern.uq.edu.au/dev/index.php?r=api/update&user_id=y.sun5@uq.edu.au&app_id=ba89d1dfe9cd6a0fcbba7983d6da0c29&url=http://tern.org.au/?&doi=10.5072/05/531FE33F49EF4" method="post">
+        <textarea name="xml" rows="20" cols="120">
+            <?xml version="1.0" encoding="UTF-8"?>
+            <resource xmlns="http://datacite.org/schema/kernel-2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://datacite.org/schema/kernel-3 http://schema.datacite.org/meta/kernel-3/metadata.xsd">
+                  <identifier identifierType="DOI">10.5072/05/531FE33F49EF4</identifier>
+                  <creators>
+                        <creator>
+                            <creatorName>First, Last name</creatorName>
+                        </creator>
+                  </creators>
+                  <titles>
+                        <title>API Update Example</title>
+                  </titles>
+                  
+                  <publisher>ACEAS</publisher>
+                  <publicationYear>2012</publicationYear>
+                  
+                  <subjects>
+                        <subject subjectScheme="Subject">Subject</subject>
+                  </subjects>
+                  <contributors>
+                        <contributor contributorType="ContactPerson">
+                            <contributorName>Contributor 1</contributorName>
+                            <nameIdentifier nameIdentifierScheme="THOMSON">Name Identifier</nameIdentifier>
+                        </contributor>
+                        
+                        <contributor contributorType="ContactPerson">
+                            <contributorName>Contributor 2</contributorName>
+                            <nameIdentifier nameIdentifierScheme="THOMSON">Name Identifier</nameIdentifier>
+                        </contributor>
+                    
+                        <contributor contributorType="ContactPerson">
+                            <contributorName>Contributor 3</contributorName>
+                            <nameIdentifier nameIdentifierScheme="THOMSON">Name Identifier</nameIdentifier>
+                        </contributor>
+                  </contributors>
+                  <dates>
+                        <date dateType="Accepted">2012-01-01</date>
+                  </dates>
+                  <language>UTF-8</language>
+                  <resourceType resourceTypeGeneral="Collection">Resource Type</resourceType>
+                  <alternateIdentifiers>
+                    <alternateIdentifier alternateIdentifierType="Cites">Alternate Identifier 1</alternateIdentifier>
+                  </alternateIdentifiers>
+                  <relatedIdentifiers>
+                    <relatedIdentifier relatedIdentifierType="ARK" relationType="Cites">Related Identifier 1</relatedIdentifier>
+                  </relatedIdentifiers>
+                  <sizes>
+                    <size>Size 1</size>
+                  </sizes>
+                  <formats>
+                    <format>Format 1</format>
+                  </formats>
+                  <version>Version</version>
+                  <rights>Rights</rights>
+                  <descriptions>
+                    <description descriptionType="Abstract">Description</description>
+                  </descriptions>
+              </resource>
+        </textarea><br />
+    
+        <input type="submit" value="Update DOI" />
+        </form>
 <hr />
 
 
@@ -254,8 +261,7 @@ Creator Name[]: <input type="text" name="creatorName[]" value="Wong, Wing-Fai" /
 <hr>
 
 <input type="submit" value="Send data to API" />
-</form></p>
-</table>
+</form>
 </body>
 </html>
 

@@ -43,7 +43,7 @@ else{
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'User', 'url'=>array('/user/index'),'visible'=>($approved == 1 && $enabled == 1)),
 				array('label'=>'DOI', 'url'=>array('/doc/index'),'visible'=>($approved == 1 && $enabled == 1)),
-				array('label'=>'Login', 'url'=>array('/site/loginoption'), 'visible'=>Yii::app()->user->name=='Guest'),
+				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->name=='Guest'),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>Yii::app()->user->name!='Guest')
 			),
 		));
