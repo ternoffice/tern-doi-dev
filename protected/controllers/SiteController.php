@@ -114,6 +114,7 @@ class SiteController extends GxController
                 session_set_cookie_params($session_expiration);
 		session_start();
                 
+               // print_r($_SESSION);die();
             	$id = $_SESSION['email'];
 		$email = $_SESSION['email'];
 		$displayName = $_SESSION['displayName'];
