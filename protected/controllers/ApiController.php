@@ -131,7 +131,8 @@ class ApiController extends Controller
                             case 'update':
                             	$xml = (isset($_POST['xml']))? $_POST['xml'] : '';                               
 				$xml = fixHtmlEntities($xml);
-                                $xmlobj=new SimpleXMLElement($xml);
+                               
+                                $xmlobj=new SimpleXMLElement(trim($xml));
 
                                 if($xmlobj->identifier->attributes()->identifierType=='DOI')
                                 {
@@ -153,7 +154,13 @@ class ApiController extends Controller
                                 //save to db
                                 if(isset($resultXml))
                                 {
-                                    $r=$dbFunction->saveToDBUpdate($cite,$resultXml);                                       
+                                    $rtu=$dbFunction->saveToDBUpdate($cite,$resultXml);  
+                                             
+                                    $doc=new DOMDocument();
+                                    $doc->formatOutput=TRUE;
+                                    $doc->loadXML($rtu->asXML());
+                                    $rxmlu=$doc->saveXML();
+                                    $r=$rxmlu;
                                 }
                                 break;
                             case 'mint':

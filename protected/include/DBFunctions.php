@@ -44,7 +44,7 @@ class DBFunctions{
 
             }else
             {                                       
-                $result=$this->errHdlr->errANDS($resultXml);
+                $result=$this->errorHdlr->errANDS($resultXml);
             }
 
 
