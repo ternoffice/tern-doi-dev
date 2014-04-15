@@ -16,7 +16,6 @@ class DataCite2_2
     */
     public static function constructDataArray($model)
     {
-
         $strValue = Yii::app()->params->strValue;
         $strAttribute = Yii::app()->params->strAttribute;
         //construct array
@@ -77,7 +76,13 @@ class DataCite2_2
         {
             $doc['descriptions'] = Array('description' => $model->description);
         }
-         
+        
+        //added by yi 15/04/2014
+        // if ($model->doc_status!='') 
+        //{
+        //    $doc['doc_status'] = Array('doc_status' => $model->doc_status);
+       // }
+
         return $doc;
     }
 

@@ -194,9 +194,6 @@ class Validation
         }elseif(!$this->validateDataManager())
         {
             $result=$this->errorHdlr->errDataManager();
-        }elseif(!$this->validateDOIOwner())
-        {
-            $result=$this->errorHdlr->errOwner();
         }elseif(!$this->validateAppId())
         {
             $result=$this->errorHdlr->errAppIdMismatch();
@@ -206,6 +203,12 @@ class Validation
             $result=true;
         }  
 
+        if($action=='update')
+        {
+            if(!$this->validateDOIOwner())  
+                $result=$this->errorHdlr->errOwner();
+        
+        }
         if($result && ($action=='mint'||$action=='update'))
         {
             if(!$this->validateRegisteredUrl($regUrls))

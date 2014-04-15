@@ -425,5 +425,6 @@ function sprintfn($format, array $args = array())
             header('HTTP/1.0 '.$result['Status']['http_code']);
             //print_r($result['xml']->asXML());
             print_r($result['xml']);
+            
     }
 ?>

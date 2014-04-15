@@ -164,11 +164,18 @@ class ApiController extends Controller
                                 
                                 if(isset($resultXml))
                                 {
-                                    $r=$dbFunction->saveToDBCreate($cite, $resultXml, $url,$user_id);
+                                    $rt=$dbFunction->saveToDBCreate($cite, $resultXml, $url,$user_id);
+                                    
+                                    $doc=new DOMDocument();
+                                    $doc->formatOutput=TRUE;
+                                    $doc->loadXML($rt->asXML());
+                                    $rxml=$doc->saveXML();
+                                    $r=array('Status'=>array('http_code'=>200), 'xml'=>$rxml);
                                 }
                                 
 				break;
                         }
+
                         return $r;
                 }else
                 {                      

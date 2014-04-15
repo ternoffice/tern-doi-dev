@@ -90,7 +90,8 @@ class DBFunctions{
                 $title=$metadata->titles->title;
                 $docXml=$metadata->asXML();
                 $docActive=true;
-                $result=$this->errorHdlr->errFree();
+                //$result=$this->errorHdlr->errFree();
+                $result=$resultXml->doi;
                 
                 //store into db
                 $model = new Doc;
@@ -114,7 +115,7 @@ class DBFunctions{
                 $docActive=false;
                 $result=$this->errorHdlr->errANDS($resultXml);
             }
-             
+
             return $result;
     }
 }

@@ -298,7 +298,6 @@ abstract class BaseDoc extends GxActiveRecord
 
     public function beforeSave()
     {
-
         $this->resource = Yii::app()->params->resource;
         $this->doc_title = $this->title[0][$this->strValue];
 
@@ -319,6 +318,7 @@ abstract class BaseDoc extends GxActiveRecord
                         return false;
                     }
                 }
+                               
                 $this->setAttribute('doc_status', 'new'); // set Status as 'new'
             }
             else
@@ -341,11 +341,13 @@ abstract class BaseDoc extends GxActiveRecord
 				}
 				$this['creator'] = $creator; 
 			}
+
             $doc = DataCite2_2::constructDataArray($this, $this->doc_status);
             //convert to XML
 			if ($this->doc_xml != 'API'){
 				$this->setAttribute('doc_xml', Array2XML::createXML('resource', $doc)->saveXML());
 			}
+
             return true;
         }
         else
@@ -364,7 +366,21 @@ abstract class BaseDoc extends GxActiveRecord
 			if (!$this->doc_doi)
 			{
 				$doi = $cite->postANDS($this->doc_url, $this->doc_xml, 'mint');
-                                
+
+                               $minStatus=(string)$doi->attributes()->type;
+                               if ($minStatus=="success")
+                               {
+                                    $this->setIsNewRecord(false);
+                                    $this->doc_doi = (string)$doi->doi;
+                                    $this->doc_status = 'Successfully minted';
+                                    $this->doc_active = true;
+                                    $this->saveAttributes(array('doc_doi', 'doc_status','doc_active'));
+                               }  
+                               else                                
+                               {
+                                   
+                               }
+                               /*
                                 $tmp=$doi['xml']{strpos($doi['xml'],'MT')+4};
                                 $t=$doi['xml']{strpos($doi['xml'],'MT')+3};
                                 $code=$t.$tmp;
@@ -380,11 +396,24 @@ abstract class BaseDoc extends GxActiveRecord
 					$this->setIsNewRecord(false);
 					$this->doc_status = $doi['xml'];
 					$this->saveAttributes(array('doc_status'));
-				}
+				}                                
+                                */
 			}
 			elseif ($this->doc_status == 'updated')
 			{
 				$doi = $cite->postANDS($this->doc_url, $this->doc_xml, 'update', $this->doc_doi);
+                                
+                                 $minStatus=(string)$doi->attributes()->type;
+                               if ($minStatus=="success")
+                               {
+                                    $this->doc_doi = (string)$doi->doi;
+                                    $this->doc_status = 'Successfully minted';
+                                    $this->saveAttributes(array('doc_status'));
+                               }else
+                               {
+                                   
+                               }
+                                /*
 				if ($doi['doi'] != '' && $doi['doi'] != 'Array' && $doi['response']==null)
 				{
 					$this->doc_doi = $doi['doi'];
@@ -394,6 +423,8 @@ abstract class BaseDoc extends GxActiveRecord
 					$this->doc_status = $doi['xml'];
 					$this->saveAttributes(array('doc_status'));
 				}
+                                 
+                                 */
 			}
 		}
         return parent::afterSave();

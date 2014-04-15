@@ -5,7 +5,6 @@
 
 class CiteANDS
 {
-
     var $resultXML;
 	
     /**
@@ -284,6 +283,15 @@ class CiteANDS
                 }
         }
          return $postData;
+    }
+   
+    public function buildDocModelToXml($postData)
+    {
+        $model=new Doc();
+        $model->setAttributes($postData);
+	$doc = DataCite2_2::constructDataArray($model);
+	$r = Array2XML::createXML('resource', $doc)->saveXML();
+        return $r;
     }
     /**
     * To verify the response ANDS.

@@ -87,8 +87,10 @@ class DocController extends GxController
 	 */
     public function actionExport()
     {
-        header("Content-type: application/txt");
-        header('Content-disposition: filename="TERN-DOI.txt"');
+    
+       // header("Content-type: application/txt");
+       // header('Content-disposition: filename="TERN-DOI.txt"');
+
 	 $criteria = '';
         $criteria .= (isset($_GET['Doc']['doc_title']) && $_GET['Doc']['doc_title'])? ' AND doc_title like \'%'.$_GET['Doc']['doc_title'].'%\'':''; 
         $criteria .= (isset($_GET['Doc']['doc_url']) && $_GET['Doc']['doc_url'])? ' AND doc_url like \'%'.$_GET['Doc']['doc_url'].'%\'':''; 
@@ -97,6 +99,7 @@ class DocController extends GxController
         $sql = 'select * from tbl_doc where doc_doi != \'\'' . $criteria;
 
         $model = Doc::model()->findAllBySql($sql);
+        print_r($model);die();        
         $doiArray = array();
         $citationArray = array();
         for ($c=0;$c<count($model);$c++)
@@ -107,7 +110,9 @@ class DocController extends GxController
             $doiArray[$c] = $model[$c]->publicationYear;
             $citationArray[$c] = strip_tags ( dataCitate(Array('creator' => $model[$c]->creator, 'publicationYear' => $model[$c]->publicationYear, 'title' => $model[$c]->doc_title, 'publisher' => $model[$c]->publisher, 'identifier' => $model[$c]->doc_doi)));
         }
+
         asort($doiArray); 
+
         foreach ($doiArray as $key => $year) {
             echo "$citationArray[$key]\r\n";
         }
@@ -208,6 +213,7 @@ class DocController extends GxController
 		else
 		{
 			$doi = $cite->postANDS($model->doc_url, $model->doc_xml, 'mint');
+
 			if ($doi['doi'] != '' && $doi['response']['type']!='failure')
 			{
 				$model->doc_doi = $doi['doi'];
@@ -239,14 +245,19 @@ class DocController extends GxController
 	{
 		$model = new Doc;
 		$user = $this->user;
+                
+               
 		if (isset($_POST['Doc']))
 		{
 			$model->setAttributes($_POST['Doc']);
+                        
 			if ($model->save())
 			{
+                            //print_r($model);die();
 				if (Yii::app()->getRequest()->getIsAjaxRequest())
 					Yii::app()->end();
 				else
+                                    
 					if (($model->doc_doi && $model->doc_status == 'Successfully minted') || $model->doc_status == 'new' || $model->doc_status == 'updated')
 					{
 						$this->redirect(array('view', 'id' => $model->doc_id));
@@ -257,6 +268,7 @@ class DocController extends GxController
 					}
 			}
 		}
+
 		$this->render('create', array('model' => $model));
 	}
 
