@@ -165,7 +165,8 @@ class ApiController extends Controller
                                 if(isset($resultXml))
                                 {
                                     $rt=$dbFunction->saveToDBCreate($cite, $resultXml, $url,$user_id);
-                                    
+
+                                    //print_r($rt);die();
                                     $doc=new DOMDocument();
                                     $doc->formatOutput=TRUE;
                                     $doc->loadXML($rt->asXML());
