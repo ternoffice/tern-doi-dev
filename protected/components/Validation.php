@@ -209,11 +209,14 @@ class Validation
                 $result=$this->errorHdlr->errOwner();
         
         }
-        if($result && ($action=='mint'||$action=='update'))
+        //if($result && ($action=='mint'||$action=='update'))
+        if($result && $action=='mint'||$action='update')
         {
-            if(!$this->validateRegisteredUrl($regUrls))
-              $result=$this->errorHdlr->errRegisteredUrl(); 
-            
+            if(($action=='mint'))
+            {
+                if(!$this->validateRegisteredUrl($regUrls))
+                  $result=$this->errorHdlr->errRegisteredUrl(); 
+            }
             if(!$this->checkUrlExists($this->url))
             {
                 $result=$this->errorHdlr->errUrlNotResolvable();
