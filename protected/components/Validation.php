@@ -220,7 +220,6 @@ class Validation
             }
         }
         
-        
         return $result;
     }
 

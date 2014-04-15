@@ -171,7 +171,7 @@ class ApiController extends Controller
                                     $doc->formatOutput=TRUE;
                                     $doc->loadXML($rt->asXML());
                                     $rxml=$doc->saveXML();
-                                    $r=array('Status'=>array('http_code'=>200), 'xml'=>$rxml);
+                                    $r=$rxml;
                                 }
                                 
 				break;
@@ -179,7 +179,7 @@ class ApiController extends Controller
 
                         return $r;
                 }else
-                {                      
+                {           
                     return $valid;
                 }
 	}
