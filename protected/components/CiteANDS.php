@@ -22,8 +22,9 @@ class CiteANDS
                                      
         // set up the xml post field to contain the valid Datacite schema xml
         $xml = 'xml=' . $docXml;
+
         $xml = html_entity_decode($xml);
-                                                                               
+                                                                     
         // define the call to the service
         $requestURI = $url . "?app_id=" . $appId . "&url=" . $docUrl;
 

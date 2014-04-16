@@ -28,6 +28,7 @@ class DBFunctions{
     {
 
             $updateStatus=(string)$resultXml->attributes()->type;
+
             if($updateStatus=='success')
             {
                 $doi=(string)$resultXml->doi;
@@ -40,7 +41,8 @@ class DBFunctions{
 
                 Doc::model()->updateAll(array('doc_title'=>$title, 'doc_xml'=>$docXml, 'doc_status'=>'success'),"doc_doi='$doi'");
 
-                $result=$this->errorHdlr->errFree();
+                $result=$resultXml->doi;
+                //$result=$this->errorHdlr->errFree();
 
             }else
             {                                       
@@ -69,7 +71,8 @@ class DBFunctions{
                     break;
                 default:break;
             }
-            $result=$this->errorHdlr->errFree();
+            $result=$resultXml->doi;
+//            $result=$this->errorHdlr->errFree();
         }else
         {
             $result=$this->errorHdlr->errANDS($resultXml);

@@ -114,7 +114,7 @@ class ApiController extends Controller
                 $regUrls=$dbFunction->getRegisteredUrl();
 
                 $valid=$validation->validateUserAll($regUrls,$action);
-                          
+                     
                 if ($valid===true)
                 {
                     $cite = new CiteANDS();   
@@ -130,7 +130,7 @@ class ApiController extends Controller
 				break;                  
                             case 'update':
                             	$xml = (isset($_POST['xml']))? $_POST['xml'] : '';                               
-				$xml = fixHtmlEntities($xml);
+				//$xml = fixHtmlEntities($xml);
                                
                                 $xmlobj=new SimpleXMLElement(trim($xml));
 
@@ -165,8 +165,9 @@ class ApiController extends Controller
                                 break;
                             case 'mint':
 
-                                $xml = (isset($_POST['xml']))? $_POST['xml'] : '';                               
-				$xml = fixHtmlEntities($xml);
+                                $xml = (isset($_POST['xml']))? $_POST['xml'] : '';   
+				//$xml = fixHtmlEntities($xml);
+                                                                    
 				$resultXml = $cite->postANDS($url, $xml, $action, $doi);
                                 
                                 if(isset($resultXml))
