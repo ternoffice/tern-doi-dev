@@ -24,7 +24,7 @@ class DBFunctions{
         
         return $registeredUrls;
     }
-    public function saveToDBUpdate($cite,$resultXml)
+    public function saveToDBUpdate($cite,$resultXml,$url)
     {
 
             $updateStatus=(string)$resultXml->attributes()->type;
@@ -38,8 +38,8 @@ class DBFunctions{
                 $title=$metadata->titles->title;
                 $docXml=$metadata->asXML();
                 $docActive=true;
-
-                Doc::model()->updateAll(array('doc_title'=>$title, 'doc_xml'=>$docXml, 'doc_status'=>'success'),"doc_doi='$doi'");
+                $updatedUrl=$url;
+                Doc::model()->updateAll(array('doc_title'=>$title, 'doc_xml'=>$docXml, 'doc_status'=>'success','doc_url'=>$updatedUrl),"doc_doi='$doi'");
 
                 $result=$resultXml->doi;
                 //$result=$this->errorHdlr->errFree();

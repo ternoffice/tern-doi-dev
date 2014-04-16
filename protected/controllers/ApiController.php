@@ -141,6 +141,7 @@ class ApiController extends Controller
                                     $match=$validation->validateDOIMatch($xmldoi, $doi);
                                      if ($match)
                                      {
+                                        
                                          $resultXml=$cite->postANDS($url, $xml, $action, $xmldoi);
                                      }else
                                      {
@@ -154,7 +155,7 @@ class ApiController extends Controller
                                 //save to db
                                 if(isset($resultXml))
                                 {
-                                    $rtu=$dbFunction->saveToDBUpdate($cite,$resultXml);  
+                                    $rtu=$dbFunction->saveToDBUpdate($cite,$resultXml,$url);  
                                              
                                     $doc=new DOMDocument();
                                     $doc->formatOutput=TRUE;
