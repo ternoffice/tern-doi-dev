@@ -402,17 +402,24 @@ function sprintfn($format, array $args = array())
 	 * @return fixed value.
 	 */
     function fixHtmlEntities($xml)
-    {
+    {              
+        
         // Encode html entities but destroy character nember referrence
-        $xml = htmlentities($xml,ENT_NOQUOTES, 'ISO-8859-1');
+        $xml1 = htmlentities($xml,ENT_NOQUOTES, 'ISO-8859-1');
+        
+
         // Restore damaged character nember referrence
-        while (strpos($xml,'&amp;'))
+        while (strpos($xml1,'&amp;'))
         {
-                $xml = str_replace('&amp;', '&', $xml);
+                $xml1 = str_replace('&amp;', '&', $xml1);
         }
+        
+                
+                
         // Decode character nember referrence
-        $xml = html_entity_decode($xml, ENT_COMPAT, 'UTF-8');
-        return $xml;
+        $xml4 = html_entity_decode($xml1, ENT_COMPAT, 'UTF-8');
+               
+        return $xml4;
     }
     
     /**

@@ -67,6 +67,7 @@ class ApiController extends Controller
 	 */
 	public function actionUpdate($user_id, $app_id, $doi, $url)
 	{
+
 		$result = $this->processAPI($user_id, $app_id, $doi, 'update', $url);
 		//$this->response($result);
                 response($result);
@@ -107,7 +108,7 @@ class ApiController extends Controller
 	private function processAPI($user_id, $app_id, $doi, $action, $url)
 	{                   
                 $user=User::model()->findByPk($user_id);
-                
+
                 $validation=new Validation($user,$doi,$app_id,$url);
                 $dbFunction=new DBFunctions();
                                                 
@@ -129,9 +130,9 @@ class ApiController extends Controller
                                 $r=$dbFunction->updateToDB($cite, $doi, 'deactivate');                              
 				break;                  
                             case 'update':
-                            	$xml = (isset($_POST['xml']))? $_POST['xml'] : '';                               
+                            	$xml = (isset($_POST['xml']))? $_POST['xml'] : ''; 
 				//$xml = fixHtmlEntities($xml);
-                               
+                               //print_r($url);die();
                                 $xmlobj=new SimpleXMLElement(trim($xml));
 
                                 if($xmlobj->identifier->attributes()->identifierType=='DOI')
@@ -141,7 +142,7 @@ class ApiController extends Controller
                                     $match=$validation->validateDOIMatch($xmldoi, $doi);
                                      if ($match)
                                      {
-                                        
+
                                          $resultXml=$cite->postANDS($url, $xml, $action, $xmldoi);
                                      }else
                                      {
@@ -168,7 +169,7 @@ class ApiController extends Controller
 
                                 $xml = (isset($_POST['xml']))? $_POST['xml'] : '';   
 				//$xml = fixHtmlEntities($xml);
-                                                                    
+
 				$resultXml = $cite->postANDS($url, $xml, $action, $doi);
                                 
                                 if(isset($resultXml))

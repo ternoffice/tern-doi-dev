@@ -10,6 +10,7 @@ return  array(
 
         // ANDS  DOI service point 1.1
         'andsMintUrl' =>       'https://services.ands.org.au/doi/1.1/mint.xml/',
+        //'andsMintUrl' => 'https://services.ands.org.au/home/dois/doi_mint.php',
         'andsUpdateUrl' =>     'https://services.ands.org.au/doi/1.1/update.xml/',
         'andsDeactivateUrl' => 'https://services.ands.org.au/doi/1.1/deactivate.xml/',
         'andsActivateUrl' =>   'https://services.ands.org.au/doi/1.1/activate.xml/',
