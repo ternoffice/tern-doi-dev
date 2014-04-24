@@ -8,6 +8,9 @@ $baseP=Yii::app()->basePath;
 
 require $baseP.'/components/CiteANDS.php';
 
+require $baseP.'/components/xml2json.php';
+//require $baseP.'/components/JSON.php';
+
 class DBFunctions{
         
     var $errorHdlr;
@@ -24,6 +27,7 @@ class DBFunctions{
         
         return $registeredUrls;
     }
+    
     public function saveToDBUpdate($cite,$resultXml,$url)
     {
 
@@ -120,6 +124,49 @@ class DBFunctions{
             }
 
             return $result;
+    }
+
+    public function buildOutput($model)
+    {
+        //getting element values from model
+        $inXml=$model->doc_xml;
+        $inXmlObj=new SimpleXMLElement($inXml);
+        
+        $id=$inXmlObj->identifier;
+        $creators=$inXmlObj->creators;
+        $title=$model->doc_title;
+        $publisher=$inXmlObj->publisher;
+        $publicationDate=$inXmlObj->publicationYear;
+                
+        //create output xml document        
+        $outXmlObj=new SimpleXMLElement('<citationMetadata />');
+        $identifier=$outXmlObj->addChild('identifier',$id);
+        $identifierType=$identifier->addAttribute('type','doi');
+        
+        for($i=0;$i<count($creators->creator);$i++)
+        {
+            $contributor=$outXmlObj->addChild('contributor');
+            $contributor->addAttribute('seq',$i+1);
+            $contributorName=(string)$creators->creator[$i]->creatorName;
+            
+            $names=explode(",", $contributorName);
+            $firstName=$names[1];
+            $lastName=$names[0];
+            
+            $family=$contributor->addChild('namePart',$lastName);
+            $family->addAttribute('type','family');
+            
+            $given=$contributor->addChild('namePart',$firstName);
+            $given->addAttribute('type','given');
+            
+        }
+        
+        $outTitle=$outXmlObj->addChild('title',$title);
+        $outPublisher=$outXmlObj->addChild('publisher',$publisher);
+        $outDate=$outXmlObj->addChild('date',$publicationDate);
+        $outDate->addAttribute('type','publicationDate');
+        
+        return $outXmlObj->asXML();
     }
 }
 ?>

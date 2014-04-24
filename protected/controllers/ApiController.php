@@ -97,6 +97,40 @@ class ApiController extends Controller
             response($result);
 	}
 
+        /**
+	 * The web service API for list DOI information according to input url
+	 * @param text  $user_id the User login ID, 
+         *              $app_id the 32 characters App ID 
+         *              $url the DOI
+         * return   output json/xml (xml by default)
+	 */
+        public function actionQuery($user_id,$app_id,$url)
+        {
+            $m=Doc::model()->findByAttributes(array('doc_url'=>$url));
+            
+            $rformat = isset($_GET['rformat'])? $_GET['rformat']:'xml';
+            $dbf=new DBFunctions();
+            $output=$dbf->buildOutput($m);
+
+            if ($rformat=='json')
+            {                
+                $output=  str_replace(array("\n", "\r", "\t"), '', $output);
+                $output = trim(str_replace('"', "'", $output));
+                
+                $json=xml2json::transformXmlStringToJson($output);
+                
+                print_r($json);
+                
+            }else if($rformat=='xml')
+            {                
+                 Header('Content-type: text/xml');
+                 print_r($output);     
+            }else
+            {
+                print_r('Wrong format. Please specify either xml or json');
+            }
+
+        }
 	/**
 	 * The private function to process data by call ANDS API.
 	 * Validate the Data Manager ID , App ID, and XML format.
