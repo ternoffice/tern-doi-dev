@@ -1,8 +1,9 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * This class does all the validations
+ * Author: Yi Sun
+ * Date:   April 2014
  */
 
 class Validation
@@ -21,6 +22,7 @@ class Validation
     
     var $errorHdlr;
     
+    //constructor
     function __construct( $user,$doi,$appId,$url )
     {
         $this->user=$user;
@@ -118,8 +120,7 @@ class Validation
         return $this->owner;
     }
     
-    //validate if url is registered
-    
+    //validate if url is registered    
     private function validateRegisteredUrl($regUrls)
     {
         $inputUrl=$this->extractUrl($this->url); 
@@ -209,14 +210,9 @@ class Validation
                 $result=$this->errorHdlr->errOwner();
         
         }
-        //if($result && ($action=='mint'||$action=='update'))
+
         if($result && $action=='mint'||$action='update')
         {
-            //if(($action=='mint'))
-            //{
-            //    if(!$this->validateRegisteredUrl($regUrls))
-            //      $result=$this->errorHdlr->errRegisteredUrl(); 
-            //}
             if(!$this->checkUrlExists($this->url))
             {
                 $result=$this->errorHdlr->errUrlNotResolvable();
@@ -227,8 +223,7 @@ class Validation
     }
 
     public function validateDOIMatch($xmldoi,$doi)
-    {        
-        
+    {       
         if($xmldoi==$doi)
         {
             $match=true;

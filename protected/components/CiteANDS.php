@@ -1,6 +1,9 @@
 <?php
 /* Class name: Cite ANDS
  * Description: This class takes care of all communication with ANDS API
+ * 
+ * Modified by: Yi Sun
+ * Date: April 2014
  */
 
 class CiteANDS
@@ -8,10 +11,15 @@ class CiteANDS
     var $resultXML;
 	
     /**
-    * To make web service call to ANDS service point with XML in post variable.
-    * Contruct ANDS service point URI
-    * @param text $docUrl the document URL, text $docXml the DOI information in XML format, text $action 'update' or 'mint' action, text $doi the DOI for update
-    * @return array $doi the response from ANDS service point 
+     * To make web service call to ANDS service point with XML in post variable.
+     * Contruct ANDS service point URI
+     * @param        $docUrl the document URL, 
+                    $docXml the DOI information in XML format, 
+     *               $action 'update' or 'mint'
+     *               $doi the DOI for update
+     * @return array $doi the response from ANDS service point 
+     * 
+     * Modified by: Yi Sun
     */
     public function postANDS($docUrl, $docXml, $action, $doi="")
     {
@@ -50,22 +58,28 @@ class CiteANDS
         if ($result)
         {
             $resultXML = $result;
-        }
-  
-        //print_r(curl_error($newch));
+        }  
+
+        //commented out below 1 line
        // $doi = $this->verifyResult($resultXML, $newch, $requestURI);
         curl_close($newch);
 
+        //added by YS, return simplexml object
         return new SimpleXMLElement($resultXML);
+        //commented out below 1 line
         //return $doi;
     }
 
     /**
-    * To make web service call to ANDS service poin.
-    * Contruct ANDS service point URI
-    * @param text $doi the DOI for update, text $action 'metadata', 'activate' or 'deactivate' action
-    * @return array $doi the response from ANDS service point 
-    */
+     * To make web service call to ANDS service poin.
+     * Contruct ANDS service point URI
+     * @param text $doi the DOI for update, 
+     *       text $action 'metadata', 'activate' or 'deactivate' action
+     * @return array $doi the response from ANDS service point 
+     * 
+     * Author: Wing-fai
+     * Modified by: Yi Sun
+     */
     public function getANDS($doi, $action)
     {
         //get URL from action
@@ -93,7 +107,11 @@ class CiteANDS
         }
 
         curl_close($newch);
-
+        
+        //commented out 1 line
+        //return $result;
+        
+        //added by YS, return simplexml object
         return new SimpleXMLElement($resultXML);
     }
 
@@ -298,6 +316,9 @@ class CiteANDS
     * To verify the response ANDS.
     * @param text $resultXML the response from ANDS, CURL object $ch, and text $doc_url the ANDS service point URI
     * @return array of 'doi' the DOI being processed, 'Status' the CURL HTTP response, 'xml' the ANDS xml response  
+     * 
+     * Modified by: Yi Sun
+     * Description: commented out entire function.
     */
 /*    
     protected function verifyResult($resultXML, $ch, $doc_url)

@@ -8,7 +8,6 @@
 
 class DataCite2_2
 {
-
     /**
     * To construct the array from the BaseDoc model.
     * @param BaseDoc object $model the DOI document model
