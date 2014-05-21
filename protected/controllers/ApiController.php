@@ -127,13 +127,22 @@ class ApiController extends Controller
             
             //search model by url
             $m=Doc::model()->findByAttributes(array('doc_url'=>$url));
-            
+
             //get requested format, xml by default
             $rformat = isset($_GET['rformat'])? $_GET['rformat']:'xml';
             
             $dbf=new DBFunctions();
-            $output=$dbf->buildOutput($m);  //build xml output
-
+            
+            if($m===NULL) //no doi info found according to the landing page url entered
+            {
+                $outXmlErr=new SimpleXMLElement('<citationMetadata />');
+                $err=$outXmlErr->addChild('error','No DOI information found');
+                $output=$outXmlErr->asXML();
+            }else
+            {
+                $output=$dbf->buildOutput($m);  //build xml output
+            }
+            
             if ($rformat=='json')           //json
             {                
                 $output=  str_replace(array("\n", "\r", "\t"), '', $output);
