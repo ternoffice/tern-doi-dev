@@ -135,8 +135,9 @@ class ApiController extends Controller
             
             if($m===NULL) //no doi info found according to the landing page url entered
             {
-                $outXmlErr=new SimpleXMLElement('<citationMetadata />');
-                $err=$outXmlErr->addChild('error','No DOI information found');
+                $outXmlErr= new SimpleXMLElement('<verbosemessage>No DOI information found </verbosemessage>');     
+//$outXmlErr=new SimpleXMLElement('<citationMetadata />');
+                //$err=$outXmlErr->addChild('error','No DOI information found');
                 $output=$outXmlErr->asXML();
             }else
             {
